@@ -1,21 +1,19 @@
 package make.me.rich.controller;
 
-import make.me.rich.service.YahooFinanceAPIService;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-import reactor.core.publisher.Mono;
+import make.me.rich.service.OpenAIService;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/chat")
 public class OpenAIController {
-    private final YahooFinanceAPIService yahooFinanceAPIService;
+    private final OpenAIService openAIService;
 
-    public OpenAIController(YahooFinanceAPIService yahooFinanceAPIService) {
-        this.yahooFinanceAPIService = yahooFinanceAPIService;
+    public OpenAIController(OpenAIService openAIService) {
+        this.openAIService = openAIService;
     }
 
-    @GetMapping("/test")
-    public Mono<String> testApi(){
-        return yahooFinanceAPIService.fetchSymbolProfileFromYahooAPI();
+    @GetMapping("/ai")
+    String generation(@RequestBody String prompt) {
+        return  openAIService.getPrompt(prompt);
     }
 }
