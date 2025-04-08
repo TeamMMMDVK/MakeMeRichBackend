@@ -9,20 +9,22 @@ import org.springframework.stereotype.Service;
 public class OpenAIService {
     private final ChatClient chatClient;
     private final YahooFinanceAPIService yahooFinanceAPIService;
+    private final TwelveDataAPIService twelveDataAPIService;
     private static final Logger logger = LoggerFactory.getLogger("OpenAI Service");
 
 
-    public OpenAIService(ChatClient.Builder chatClientBuilder, YahooFinanceAPIService yahooFinanceAPIService) {
-       this.chatClient = chatClientBuilder.build();
+    public OpenAIService(ChatClient.Builder chatClientBuilder, YahooFinanceAPIService yahooFinanceAPIService, TwelveDataAPIService twelveDataAPIService) {
+        this.chatClient = chatClientBuilder.build();
         this.yahooFinanceAPIService = yahooFinanceAPIService;
+        this.twelveDataAPIService = twelveDataAPIService;
     }
 
     public String getPrompt(String userPrompt) {
-       String prompt = this.chatClient.prompt()
-                .user(userPrompt + yahooFinanceAPIService.fetchSymbolProfileFromYahooAPI())
+        String prompt = this.chatClient.prompt()
+                .user(userPrompt + yahooFinanceAPIService.fetchSymbolProfileFromYahooAPI("META") + twelveDataAPIService.fetchSymbolHistoricDataFromTwelveDataAPI("META"))
                 .call()
                 .content();
-       logger.info(prompt);
-       return prompt;
+        logger.info(prompt);
+        return prompt;
     }
 }
