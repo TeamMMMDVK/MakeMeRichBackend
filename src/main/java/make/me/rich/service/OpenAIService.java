@@ -25,7 +25,7 @@ public class OpenAIService {
                 + twelveDataAPIService.fetchSymbolHistoricDataFromTwelveDataAPI(symbol);
 
         String response = this.chatClient.prompt() //her sammensættes vores prompt
-                .system("You are an experienced stockanalytic who answers and explain short and precise")
+                .system("You are an experienced stock analytics who answers and explain short and precise")
                 .user(fullPrompt)
                 .call() //her laves kaldet
                 .content(); //her modtages svaret
