@@ -21,8 +21,8 @@ public class OpenAIService {
 
     public String getPrompt(String userPrompt, String symbol) {
         String fullPrompt = userPrompt
-                + yahooFinanceAPIService.fetchSymbolProfileFromYahooAPI(symbol)
-                + twelveDataAPIService.fetchSymbolHistoricDataFromTwelveDataAPI(symbol);
+                + yahooFinanceAPIService.fetchSymbolProfileFromYahooAPI(symbol);
+                //+ twelveDataAPIService.fetchSymbolHistoricDataFromTwelveDataAPI(symbol);
 
         String response = this.chatClient.prompt() //her sammensættes vores prompt
                 .system("You are an experienced stock analytics who answers and explain short and precise")

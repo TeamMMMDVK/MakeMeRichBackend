@@ -2,10 +2,10 @@ package make.me.rich.controller;
 
 import make.me.rich.service.TwelveDataAPIService;
 import make.me.rich.service.YahooFinanceAPIService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin("*")
 public class StockController {
 
 
@@ -22,8 +22,8 @@ public class StockController {
         return yahooFinanceAPIService.fetchSymbolProfileFromYahooAPI("META");
     }
 
-    @GetMapping("/testtd")
-    public String testGetTDInfo() {
-        return twelveDataAPIService.fetchSymbolHistoricDataFromTwelveDataAPI("META");
+    @GetMapping("/twelveapi")
+    public String testGetTDInfo(@RequestParam String symbol) {
+        return twelveDataAPIService.fetchSymbolHistoricDataFromTwelveDataAPI(symbol);
     }
 }
