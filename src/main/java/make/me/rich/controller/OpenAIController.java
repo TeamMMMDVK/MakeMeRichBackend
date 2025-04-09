@@ -5,6 +5,7 @@ import make.me.rich.service.OpenAIService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/chat")
 public class OpenAIController {
     private final OpenAIService openAIService;
@@ -13,7 +14,7 @@ public class OpenAIController {
         this.openAIService = openAIService;
     }
 
-    @GetMapping("/ai")
+    @PostMapping("/ai")
     String generation(@RequestBody ChatRequestDTO chatRequestDTO) { //Spring kan kun håndtere én requestbody, så når vi gerne vil
         //sende flere data, så laver vi en DTO med det ønskede
         return  openAIService.getPrompt(chatRequestDTO.getPrompt(), chatRequestDTO.getSymbol());
