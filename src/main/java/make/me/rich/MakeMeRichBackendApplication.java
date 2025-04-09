@@ -1,5 +1,7 @@
 package make.me.rich;
 
+import make.me.rich.model.Meta;
+import make.me.rich.service.TwelveDataAPIService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
