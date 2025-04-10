@@ -1,4 +1,4 @@
-package make.me.rich.model;
+package make.me.rich.config;
 
 import com.google.common.cache.CacheBuilder;
 import org.springframework.cache.Cache;
@@ -27,7 +27,7 @@ public class CacheConfig {
                 return new ConcurrentMapCache(
                         name,
                         CacheBuilder.newBuilder()
-                                .expireAfterWrite(30, TimeUnit.SECONDS)
+                                .expireAfterWrite(120, TimeUnit.SECONDS)
                                 .build().asMap(),
                         false);
             }
